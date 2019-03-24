@@ -75,7 +75,7 @@ Question.prototype.randomQuestion = function (arr) {
     console.log()
 }
 
-Question.prototype.checkQuestion = function (answer) {
+Question.prototype.checkQuestion = function () {
     var promptAnswer = prompt('Choose the the number of answer from the console.')
     if (promptAnswer == this.correctAnswer) {
         console.log('You are right');
@@ -84,6 +84,7 @@ Question.prototype.checkQuestion = function (answer) {
     }
 }
 
+question01.randomQuestion(questionsArr);
 question01.checkQuestion(questionsArr);
 
 
