@@ -114,12 +114,14 @@ interfere with the other programmers code (Hint: we learned a special technique 
     }
 
     Question.prototype.checkAnswer = function () {
-        if (promptAnswer === this.correctAnswer) {
+        if (parseInt(promptAnswer) === this.correctAnswer) {
             console.log('You are right');
+            infinity();
         }else if (promptAnswer === 'exit') {
-            alert(1);
+
         }else {
             console.log('You are wrong. Try one more time.')
+            infinity();
         }
     }
     var question01 = new Question(
@@ -138,13 +140,12 @@ interfere with the other programmers code (Hint: we learned a special technique 
         1
     );
     var questionsArr = [question01, question02, question03];
-
     var n = Math.floor(Math.random() * questionsArr.length);
-
     questionsArr[n].showQuestion();
-
-    var promptAnswer = parseInt(prompt('Choose the the number of answer from the console.'));
-    console.info(promptAnswer);
-
+    var promptAnswer = prompt('Choose the the number of answer from the console.');
     questionsArr[n].checkAnswer();
+    //infinity();
+    function infinity() {
+        questionsArr[n].showQuestion();
+    }
 })();
