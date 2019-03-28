@@ -101,6 +101,9 @@ interfere with the other programmers code (Hint: we learned a special technique 
 */
 
 (function () {
+    var score = 0;
+    var startGame = true;
+    var promptAnswer;
     function Question (question, answers, correctAnswer) {
         this.question = question;
         this.answers = answers;
@@ -114,15 +117,19 @@ interfere with the other programmers code (Hint: we learned a special technique 
     }
 
     Question.prototype.checkAnswer = function () {
-        if (parseInt(promptAnswer) === this.correctAnswer) {
+        if (promptAnswer === 'exit') {
+            startGame = false;
+        }
+        else if (parseInt(promptAnswer) === this.correctAnswer) {
             console.log('You are right');
-            infinity();
-        }else if (promptAnswer === 'exit') {
-
+            score++;
         }else {
             console.log('You are wrong. Try one more time.')
-            infinity();
         }
+    }
+
+    Question.prototype.score = function () {
+        console.log('--------------------------------\nYour score is: ' + score + '\n--------------------------------');
     }
     var question01 = new Question(
         'What is your favourite TV-show?',
@@ -140,12 +147,16 @@ interfere with the other programmers code (Hint: we learned a special technique 
         1
     );
     var questionsArr = [question01, question02, question03];
-    var n = Math.floor(Math.random() * questionsArr.length);
-    questionsArr[n].showQuestion();
-    var promptAnswer = prompt('Choose the the number of answer from the console.');
-    questionsArr[n].checkAnswer();
-    //infinity();
-    function infinity() {
+    askQuestion();
+
+    function askQuestion() {
+        var n = Math.floor(Math.random() * questionsArr.length);
         questionsArr[n].showQuestion();
+        promptAnswer = prompt('Choose the the number of answer from the console.');
+        questionsArr[n].checkAnswer();
+        questionsArr[n].score();
+        if (startGame) {askQuestion();}
     }
+
+
 })();
